@@ -2,6 +2,17 @@
 
 All notable changes to the "arti-ai-commit" extension will be documented in this file.
 
+## [0.0.3] - 2026-03-10
+
+### Fixed
+- **하위 호환성 개선**: Antigravity 및 구버전 VS Code(`1.107.0` 이상)에서도 사용할 수 있도록 엔진 요구 버전을 `^1.110.0`에서 `^1.107.0`으로 하향 조정.
+
+## [0.0.2] - 2026-03-10
+
+### Added
+- **전문적인 아이콘 적용**: `git-ai-commit` 목적에 부합하는 프로페셔널한 모양의 새 앱 아이콘 교체 적용.
+- **마켓플레이스 통합 배포 스크립트**: VS Code Marketplace와 Open VSX를 동시에 배포할 수 있는 단축 스크립트 추가.
+
 ## [0.0.1] - 2026-03-10
 
 ### Added
