@@ -5,6 +5,13 @@
   "version": "0.0.1",
   "publisher": "artgrammer",
   "license": "MIT",
+  "icon": "images/icon.png",
+  "keywords": [
+    "git",
+    "commit",
+    "gemini",
+    "ai"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/SaAkSin/arti-ai-commit.git"
@@ -48,7 +55,9 @@
     "watch-tests": "tsc -p . -w --outDir out",
     "pretest": "npm run compile-tests && npm run compile && npm run lint",
     "lint": "eslint src",
-    "test": "vscode-test"
+    "test": "vscode-test",
+    "publish:vscode": "vsce publish",
+    "publish:openvsx": "ovsx publish"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.10",
@@ -56,7 +65,9 @@
     "@types/vscode": "^1.110.0",
     "@vscode/test-cli": "^0.0.12",
     "@vscode/test-electron": "^2.5.2",
+    "@vscode/vsce": "^3.7.1",
     "eslint": "^9.39.3",
+    "ovsx": "^0.10.9",
     "ts-loader": "^9.5.4",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.56.1",

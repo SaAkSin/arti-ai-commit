@@ -58,7 +58,7 @@ export function activate(context: vscode.ExtensionContext) {
             }, async () => {
                 // [이 부분 추가] 동적 임포트로 모듈 불러오기
                 const { GoogleGenAI } = await import('@google/genai');
-                
+
                 const ai = new GoogleGenAI({ apiKey: apiKey });
                 const prompt = `
 다음은 Git diff의 변경사항입니다. 이 코드를 분석하여 실무적인 Git 커밋 메시지를 작성해주세요.
@@ -70,7 +70,7 @@ ${diff}
                 `;
 
                 const response = await ai.models.generateContent({
-                    model: 'gemini-2.5-flash',
+                    model: 'gemini-flash-latest',
                     contents: prompt,
                 });
 
