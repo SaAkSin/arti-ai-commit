@@ -17,7 +17,7 @@ export function activate(context: vscode.ExtensionContext) {
     });
 
     // 2. 커밋 메시지 생성 명령어
-    let generateDisposable = vscode.commands.registerCommand('arti-ai-commit.generateMessage', async () => {
+    let generateDisposable = vscode.commands.registerCommand('arti-ai-commit.generateMessage', async (...args: any[]) => {
         try {
             const gitExtension = vscode.extensions.getExtension('vscode.git');
             if (!gitExtension) throw new Error('Git 익스텐션을 찾을 수 없습니다.');
@@ -28,7 +28,32 @@ export function activate(context: vscode.ExtensionContext) {
                 return;
             }
 
-            const repository = git.repositories[0];
+            let repository = git.repositories[0];
+
+            // 다중 레포지토리(Worktree 등) 처리
+            if (git.repositories.length > 1) {
+                // 1. SCM 뷰에서 클릭한 경우 인자(SourceControl)로 넘어온 URI 확인
+                const scm = args && args[0];
+                if (scm && scm.rootUri) {
+                    const found = git.repositories.find((r: any) => r.rootUri.toString() === scm.rootUri.toString());
+                    if (found) repository = found;
+                } else {
+                    // 2. 인자가 없으면 포커스된(선택된) 레포지토리 찾기
+                    const selected = git.repositories.find((r: any) => r.ui && r.ui.selected);
+                    if (selected) {
+                        repository = selected;
+                    } else {
+                        // 3. 현재 활성화된 에디터의 파일 경로를 기준으로 판별
+                        const activeEditor = vscode.window.activeTextEditor;
+                        if (activeEditor) {
+                            const activeUri = activeEditor.document.uri.toString();
+                            const found = git.repositories.find((r: any) => activeUri.startsWith(r.rootUri.toString()));
+                            if (found) repository = found;
+                        }
+                    }
+                }
+            }
+
             const diff = await repository.diff(true);
 
             if (!diff) {
