@@ -2,7 +2,7 @@
   "name": "arti-ai-commit",
   "displayName": "arti-ai-commit",
   "description": "Git 커밋 메시지를 한국어로 자동 생성해 주는 확장 프로그램 (Gemini API 기반)",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "publisher": "artgrammer",
   "license": "MIT",
   "icon": "images/icon.png",
