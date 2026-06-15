@@ -96,6 +96,15 @@ export function activate(context: vscode.ExtensionContext) {
                 const config = vscode.workspace.getConfiguration('arti-ai-commit');
                 const customPrompt = config.get<string>('customPrompt') || '';
                 const simpleMode = config.get<boolean>('simpleMode') || false;
+                const selectedModel = config.get<string>('model') || 'Gemini Flash Latest';
+
+                // 모델 매핑 처리
+                const modelMapping: { [key: string]: string } = {
+                    'Gemini Pro Latest': 'gemini-pro-latest',
+                    'Gemini Flash Latest': 'gemini-flash-latest',
+                    'Gemini Flash-Lite Latest': 'gemini-flash-lite-latest'
+                };
+                const modelId = modelMapping[selectedModel] || 'gemini-flash-latest';
 
                 let prompt = '';
 
@@ -121,7 +130,7 @@ ${diff}
                 }
 
                 const response = await ai.models.generateContent({
-                    model: 'gemini-flash-latest',
+                    model: modelId,
                     contents: prompt,
                 });
 

@@ -2,6 +2,13 @@
 
 All notable changes to the "arti-ai-commit" extension will be documented in this file.
 
+## [0.0.7] - 2026-06-15
+
+### Added
+- **설정 기능 고도화**:
+  - 사용자 정의 프롬프트(`customPrompt`) 입력란에 멀티라인 텍스트 지원을 추가하여 긴 프롬프트 작성을 용이하게 개선.
+  - 메시지 분석/생성에 사용할 Gemini 모델 선택 설정 옵션(`model`) 추가 (Gemini Pro Latest, Gemini Flash Latest, Gemini Flash-Lite Latest 지원).
+
 ## [0.0.6] - 2026-06-15
 
 ### Added

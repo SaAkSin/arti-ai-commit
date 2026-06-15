@@ -26,6 +26,11 @@
 
 ## 릴리스 노트 (Release Notes)
 
+### 0.0.7
+- **설정 기능 고도화**:
+  - 사용자 지정 프롬프트 입력란 멀티라인 지원 (`editPresentation: multilineText` 적용)
+  - Gemini 모델 선택 기능 추가 (Gemini Pro Latest, Gemini Flash Latest, Gemini Flash-Lite Latest 중 택 1)
+
 ### 0.0.6
 - **사용자 정의 설정 기능**: 사용자 지정 분석 프롬프트 및 단 한 줄 요약 커밋 생성 옵션 추가
 - **ESLint 경고 제거**: 정적 분석을 통해 잠재적 결함 가능성이 있는 구문 정제 및 빌드 최적화

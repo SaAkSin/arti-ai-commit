@@ -2,7 +2,7 @@
   "name": "arti-ai-commit",
   "displayName": "arti-ai-commit",
   "description": "Git 커밋 메시지를 한국어로 자동 생성해 주는 확장 프로그램 (Gemini API 기반)",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "publisher": "artgrammer",
   "license": "MIT",
   "icon": "images/icon.png",
@@ -51,12 +51,23 @@
         "arti-ai-commit.customPrompt": {
           "type": "string",
           "default": "",
-          "markdownDescription": "커밋 메시지 생성 시 사용할 사용자 정의 프롬프트입니다. 비워두면 기본 한국어 프롬프트가 사용됩니다. `${diff}` 변수를 사용하여 변경사항이 삽입될 위치를 지정할 수 있습니다."
+          "markdownDescription": "커밋 메시지 생성 시 사용할 사용자 정의 프롬프트입니다. 비워두면 기본 한국어 프롬프트가 사용됩니다. `${diff}` 변수를 사용하여 변경사항이 삽입될 위치를 지정할 수 있습니다.",
+          "editPresentation": "multilineText"
         },
         "arti-ai-commit.simpleMode": {
           "type": "boolean",
           "default": false,
           "description": "활성화할 경우 마크다운 서식이나 여러 줄의 설명 없이 오직 한 줄의 짧고 직관적인 커밋 메시지만 생성합니다."
+        },
+        "arti-ai-commit.model": {
+          "type": "string",
+          "default": "Gemini Flash Latest",
+          "enum": [
+            "Gemini Pro Latest",
+            "Gemini Flash Latest",
+            "Gemini Flash-Lite Latest"
+          ],
+          "description": "커밋 메시지 분석 및 생성에 사용할 Gemini 모델을 선택합니다."
         }
       }
     }
