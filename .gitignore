@@ -7,3 +7,13 @@ node_modules
 *.log
 .env
 .env.*
+
+# 에이전트 및 바이브 코딩 (Vibe Coding) 관련 파일 무시
+.gemini/
+.agent/
+agent-scratch/
+.antigravity/
+*.scratch
+GEMINI.md
+
+

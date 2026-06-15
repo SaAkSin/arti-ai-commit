@@ -11,7 +11,7 @@
 
 ## 요구 사항 (Requirements)
 
-- **VS Code 버전**: `1.110.0` 이상
+- **VS Code 버전**: `1.107.0` 이상 (Antigravity 호환성 충족)
 - **API Key**: [Google AI Studio](https://aistudio.google.com/app/apikey)에서 발급받은 **Gemini API Key**가 필요합니다.
 
 ## 사용 방법 (Usage)
@@ -26,8 +26,23 @@
 
 ## 릴리스 노트 (Release Notes)
 
-### 0.0.1
+### 0.0.6
+- **사용자 정의 설정 기능**: 사용자 지정 분석 프롬프트 및 단 한 줄 요약 커밋 생성 옵션 추가
+- **ESLint 경고 제거**: 정적 분석을 통해 잠재적 결함 가능성이 있는 구문 정제 및 빌드 최적화
 
-- 초기 릴리스 (Initial release)
-- Gemini API 연동 및 자동 커밋 메시지 생성 기능 추가
-- VS Code SecretStorage를 활용한 API 키 보안 강화
+### 0.0.5
+- 패키지 빌드 버전 일치화 (`package-lock.json` 수정)
+
+### 0.0.4
+- **다중 저장소(Worktree 등) 환경 인식 개선**: 작업 영역 내 다중 Git 저장소가 있는 경우, 활성 파일 경로/SCM 포커스 기준으로 타겟 저장소를 오동작 없이 식별하도록 로직 개선
+
+### 0.0.3
+- **구버전 VS Code 호환 패치**: 엔진 요구 사항을 `1.107.0` 이상으로 완화하여 하위 호환성 강화
+
+### 0.0.2
+- **프로페셔널 앱 아이콘 적용**: `git-ai-commit` 목적에 부합하는 아이콘 적용
+- **다중 마켓플레이스 배포 최적화**: VS Code Marketplace와 Open VSX 동시 배포 스크립트 추가
+
+### 0.0.1
+- 초기 릴리스 (Gemini API 연동 자동 커밋 메시지 생성 및 SecretStorage 기반 API Key 보안 관리)
+

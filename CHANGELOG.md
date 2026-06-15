@@ -2,6 +2,22 @@
 
 All notable changes to the "arti-ai-commit" extension will be documented in this file.
 
+## [0.0.6] - 2026-06-15
+
+### Added
+- **사용자 정의 설정 기능**: VS Code 설정 UI를 통해 사용자 정의 프롬프트(`arti-ai-commit.customPrompt`) 및 단 한 줄의 커밋 메시지만 생성하는 단순 모드(`arti-ai-commit.simpleMode`) 기능 도입.
+- **코드 품질 정제**: ESLint의 조건절 중괄호 누락 경고를 완벽히 해결하여 정적 분석 결과 신뢰성 확보.
+
+## [0.0.5] - 2026-04-20
+
+### Changed
+- **패키지 빌드 동기화**: `package-lock.json` 및 `package.json` 릴리스 버전 불일치 수정 및 0.0.5 빌드 동기화.
+
+## [0.0.4] - 2026-04-20
+
+### Added
+- **다중 저장소(Worktree 등) 환경 인식 개선**: 작업 영역 내 다중 Git 저장소가 존재할 때 활성 에디터 경로 및 SCM 포커스를 추적하여 올바른 레포지토리의 Diff를 추출하는 로직 구현.
+
 ## [0.0.3] - 2026-03-10
 
 ### Fixed

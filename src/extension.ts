@@ -20,7 +20,9 @@ export function activate(context: vscode.ExtensionContext) {
     let generateDisposable = vscode.commands.registerCommand('arti-ai-commit.generateMessage', async (...args: any[]) => {
         try {
             const gitExtension = vscode.extensions.getExtension('vscode.git');
-            if (!gitExtension) throw new Error('Git 익스텐션을 찾을 수 없습니다.');
+            if (!gitExtension) {
+                throw new Error('Git 익스텐션을 찾을 수 없습니다.');
+            }
 
             const git = gitExtension.exports.getAPI(1);
             if (git.repositories.length === 0) {
@@ -36,7 +38,9 @@ export function activate(context: vscode.ExtensionContext) {
                 const scm = args && args[0];
                 if (scm && scm.rootUri) {
                     const found = git.repositories.find((r: any) => r.rootUri.toString() === scm.rootUri.toString());
-                    if (found) repository = found;
+                    if (found) {
+                        repository = found;
+                    }
                 } else {
                     // 2. 인자가 없으면 포커스된(선택된) 레포지토리 찾기
                     const selected = git.repositories.find((r: any) => r.ui && r.ui.selected);
@@ -48,7 +52,9 @@ export function activate(context: vscode.ExtensionContext) {
                         if (activeEditor) {
                             const activeUri = activeEditor.document.uri.toString();
                             const found = git.repositories.find((r: any) => activeUri.startsWith(r.rootUri.toString()));
-                            if (found) repository = found;
+                            if (found) {
+                                repository = found;
+                            }
                         }
                     }
                 }
@@ -85,14 +91,34 @@ export function activate(context: vscode.ExtensionContext) {
                 const { GoogleGenAI } = await import('@google/genai');
 
                 const ai = new GoogleGenAI({ apiKey: apiKey });
-                const prompt = `
+
+                // 사용자 설정 가져오기
+                const config = vscode.workspace.getConfiguration('arti-ai-commit');
+                const customPrompt = config.get<string>('customPrompt') || '';
+                const simpleMode = config.get<boolean>('simpleMode') || false;
+
+                let prompt = '';
+
+                if (customPrompt.trim().length > 0) {
+                    if (customPrompt.includes('${diff}')) {
+                        prompt = customPrompt.replace('${diff}', diff);
+                    } else {
+                        prompt = `${customPrompt}\n\nDiff:\n${diff}`;
+                    }
+                } else {
+                    prompt = `
 다음은 Git diff의 변경사항입니다. 이 코드를 분석하여 실무적인 Git 커밋 메시지를 작성해주세요.
 Conventional Commits 형식(예: feat: 기능 추가, fix: 버그 수정 등)을 따르고, 반드시 한국어로 간결하고 명확하게 작성해주세요.
 마크다운 코드 블록이나 부연 설명 없이, 바로 복사해서 쓸 수 있는 커밋 메시지만 출력해주세요.
 
 Diff:
 ${diff}
-                `;
+                    `;
+                }
+
+                if (simpleMode) {
+                    prompt += `\n\n[중요 규칙: 단순 모드 활성화됨] 본문이나 바닥글(Footer), 마크다운 서식 없이 오직 단 한 줄(One-liner)의 핵심 커밋 메시지만 출력해 주세요.`;
+                }
 
                 const response = await ai.models.generateContent({
                     model: 'gemini-flash-latest',
